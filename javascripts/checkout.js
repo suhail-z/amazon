@@ -1,5 +1,5 @@
 import {products} from './data/products.js';
-import {cart,removeFromCart} from './data/cart.js';
+import {cart,removeFromCart,updateDeliveryOption} from './data/cart.js';
 import {formatCurrency} from '../utils/currency.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions,getDeliveryDate }  from './data/deliveryOptions.js';
@@ -76,7 +76,7 @@ function deliveryOptionsHTML(index,cartItem){
     
         deliveryHTML +=
     `
-    <div class="delivery-option">
+    <div class="delivery-option js-delivery-option" data-product-id="${cartItem.id}" data-delivery-id="${option.id}">
                <input type="radio" ${isChecked? 'checked' : ''} class="delivery-option-input"
                name="delivery-option-${index}">
                <div>
@@ -153,4 +153,12 @@ forEach(saveLink => {
         console.log(cart);
         location.reload();
     })
+})
+
+document.querySelectorAll('.js-delivery-option')
+.forEach((element)=>{
+  element.addEventListener('click',()=>{
+    updateDeliveryOption(element.dataset.productId,element.dataset.deliveryId);
+  })
+
 })
