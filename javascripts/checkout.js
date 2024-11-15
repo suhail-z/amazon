@@ -4,7 +4,8 @@ import {formatCurrency} from '../utils/currency.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions,getDeliveryDate }  from './data/deliveryOptions.js';
 
-window.onload=checkoutQuantity;
+function renderOrderSummary(){
+
 let checkoutSummaryHTML='';
 cart.forEach((cartItem,index)=>{
 
@@ -29,7 +30,7 @@ cart.forEach((cartItem,index)=>{
                 ${match.name}
             </div>
             <div class="product-price">
-                $${formatCurrency(match.priceCents)}
+                $ ${formatCurrency(match.priceCents)}
             </div>
             <div class="product-quantity">
                 <span>
@@ -60,7 +61,7 @@ cart.forEach((cartItem,index)=>{
     `
 
 })
-
+checkoutQuantity();
 function deliveryOptionsHTML(index,cartItem){
     let deliveryHTML='';
     deliveryOptions.forEach( option =>{
@@ -151,7 +152,7 @@ forEach(saveLink => {
                 });
         localStorage.setItem('cart',JSON.stringify(cart));
         console.log(cart);
-        location.reload();
+        renderOrderSummary();
     })
 })
 
@@ -159,6 +160,9 @@ document.querySelectorAll('.js-delivery-option')
 .forEach((element)=>{
   element.addEventListener('click',()=>{
     updateDeliveryOption(element.dataset.productId,element.dataset.deliveryId);
+    renderOrderSummary();
   })
 
 })
+}
+renderOrderSummary();
