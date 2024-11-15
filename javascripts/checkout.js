@@ -1,5 +1,5 @@
-import {products} from './products.js';
-import {cart,removeFromCart} from './cart.js';
+import {products} from './data/products.js';
+import {cart,removeFromCart} from './data/cart.js';
 import {formatCurrency} from '../utils/currency.js';
 window.onload=checkoutQuantity;
 let checkoutSummaryHTML='';

@@ -1,5 +1,5 @@
-import {cart,addToCart} from "./cart.js"
-import { products } from "./products.js";
+import {cart,addToCart} from "./data/cart.js"
+import { products } from "./data/products.js";
 import { formatCurrency } from "../utils/currency.js";
 
 window.onload=cartQuantityUpdate;
