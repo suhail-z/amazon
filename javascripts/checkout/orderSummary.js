@@ -1,21 +1,18 @@
-import {products} from '../data/products.js';
+import {getProduct, products} from '../data/products.js';
 import {cart,removeFromCart,updateDeliveryOption} from '../data/cart.js';
 import {formatCurrency} from '../utils/currency.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions,getDeliveryDate }  from '../data/deliveryOptions.js';
+import { renderPaymentSummmary } from './paymentSummmary.js';
 
 export function renderOrderSummary(){
 
 let checkoutSummaryHTML='';
 cart.forEach((cartItem,index)=>{
 
-    let match;
+    let match=getProduct(cartItem.id);
 
-    products.forEach((product)=>{
-        if(product.id===cartItem.id)
-            match=product;
-    })
-
+    
     checkoutSummaryHTML += `<div class="cart-item-container js-checkout-product${match.id}">
         <div class="delivery-date">
             Delivery date: ${getDeliveryDate(cartItem.deliveryOptionsId)}
@@ -103,7 +100,7 @@ document.querySelectorAll('.js-delete-link')
         removeFromCart(deleteLink.dataset.productId);
         deleteFromCart(deleteLink.dataset.productId);
         checkoutQuantity();
-
+        renderPaymentSummmary();
     })
 })
 function deleteFromCart(productId){
@@ -151,8 +148,8 @@ forEach(saveLink => {
                 
                 });
         localStorage.setItem('cart',JSON.stringify(cart));
-        console.log(cart);
         renderOrderSummary();
+        renderPaymentSummmary();
     })
 })
 
@@ -161,6 +158,7 @@ document.querySelectorAll('.js-delivery-option')
   element.addEventListener('click',()=>{
     updateDeliveryOption(element.dataset.productId,element.dataset.deliveryId);
     renderOrderSummary();
+    renderPaymentSummmary();
   })
 
 })

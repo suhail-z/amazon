@@ -17,18 +17,22 @@ export const deliveryOptions=[
         shipping : 999
     }
 ];
-export function getDeliveryDate(id){
+export function getDeliveryDate(deliveryId){
 
-    let deliveryDay;
-    deliveryOptions.forEach(option=>{
-        if(id === option.id)
-       deliveryDay=option.deliveryDays;
-    })
-
+    let deliveryOption = getDeliveryDetails(deliveryId);
 
     const today=dayjs();
-    const deliveryTime  = today.add( deliveryDay,'days')
+    const deliveryTime  = today.add( deliveryOption.deliveryDays,'days')
     .format('dddd, MMMM D');
-   console.log(deliveryTime);
     return deliveryTime;
+}
+export function getDeliveryDetails(deliveryId){
+    let match;
+    deliveryOptions.forEach(option =>{
+        if(option.id === deliveryId){
+            match=option;
+            return;
+        }
+    })
+    return match  || deliveryOptions[0];
 }
