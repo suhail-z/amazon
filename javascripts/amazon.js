@@ -1,6 +1,6 @@
 import {cart,addToCart} from "./data/cart.js"
 import { products } from "./data/products.js";
-import { formatCurrency } from "../utils/currency.js";
+import { formatCurrency } from "./utils/currency.js";
 
 window.onload=cartQuantityUpdate;
 //products are stored in seperate js file
