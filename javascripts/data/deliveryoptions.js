@@ -17,14 +17,26 @@ export const deliveryOptions=[
         shipping : 999
     }
 ];
-export function getDeliveryDate(deliveryId){
-
-    let deliveryOption = getDeliveryDetails(deliveryId);
+export function getDeliveryDate(option){
 
     const today=dayjs();
-    const deliveryTime  = today.add( deliveryOption.deliveryDays,'days')
-    .format('dddd, MMMM D');
-    return deliveryTime;
+       
+    let deliveryDays = option.deliveryDays;
+    let predictionDate =dayjs();
+    let predictionDay = today.format('dddd');
+    
+    while(deliveryDays>0){
+        predictionDate = predictionDate.add(1,'days');
+        predictionDay =predictionDate.format('dddd');
+        
+        if(predictionDay === 'Saturday' || predictionDay === 'Sunday'){
+            continue;
+        }
+        else{
+            deliveryDays--;
+        }
+    }
+    return predictionDate.format('dddd, MMMM D');
 }
 export function getDeliveryDetails(deliveryId){
     let match;
