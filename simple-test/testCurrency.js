@@ -1,4 +1,4 @@
-import { formatCurrency } from "../javascripts/utils/currency.js";
+import { formatCurrency } from "../../javascripts/utils/currency.js";
 
 console.log('Test Suite : currency conversion');
 console.log('basic test case');

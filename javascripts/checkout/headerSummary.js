@@ -5,5 +5,5 @@ export function renderHeaderSummary(){
    cart.forEach(item=>{
      cartQuantity += item.quantity;
    })
-   document.querySelector('.return-to-home-link').innerHTML=cartQuantity;
+   document.querySelector('.js-header-checkout').innerHTML=cartQuantity;
  }

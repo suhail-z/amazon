@@ -14,7 +14,9 @@ cart.forEach((cartItem,index)=>{
     let match=getProduct(cartItem.id);
     let deliveryOption = getDeliveryDetails(cartItem.deliveryOptionsId);
     
-    checkoutSummaryHTML += `<div class="cart-item-container js-checkout-product${match.id}">
+    checkoutSummaryHTML += `<div class="cart-item-container  
+    js-cart-item-container  
+    js-checkout-product${match.id}">
         <div class="delivery-date">
             Delivery date: ${getDeliveryDate(deliveryOption)}
         </div>
@@ -30,7 +32,7 @@ cart.forEach((cartItem,index)=>{
             <div class="product-price">
                 $ ${formatCurrency(match.priceCents)}
             </div>
-            <div class="product-quantity">
+            <div class="product-quantity js-product-quantity-${match.id}">
                 <span>
                 Quantity: <span class="quantity-label">${cartItem.quantity}</span>
                 </span>
@@ -41,7 +43,7 @@ cart.forEach((cartItem,index)=>{
                 <input class=" update-input update-input-${match.id}" type="number" data-product-id="${match.id}">
                 <span class="link-primary save-link js-save-${match.id}" data-product-id="${match.id}">save</span>
                 
-                <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${match.id}">
+                <span class="delete-quantity-link link-primary js-delete-link js-delete-link-${match.id}" data-product-id="${match.id}">
                 Delete
                 </span>
             </div>
@@ -136,6 +138,7 @@ forEach(saveLink => {
         localStorage.setItem('cart',JSON.stringify(cart));
         renderOrderSummary();
         renderPaymentSummmary();
+        renderHeaderSummary();
     })
 })
 

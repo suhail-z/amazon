@@ -1,5 +1,8 @@
 
-export let cart = JSON.parse(localStorage.getItem('cart')) || [
+export let cart;
+loadFromStorage();
+export function loadFromStorage(){
+  cart = JSON.parse(localStorage.getItem('cart')) || [
     { id: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
        quantity: 3,
        deliveryOptionsId : '1'
@@ -9,6 +12,7 @@ export let cart = JSON.parse(localStorage.getItem('cart')) || [
        deliveryOptionsId : '2'
     }
   ];
+}
 
 
 export function addToCart(productId) {
