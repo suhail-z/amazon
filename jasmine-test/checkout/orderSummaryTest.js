@@ -10,7 +10,7 @@ beforeEach(()=>{
     document.querySelector('.js-test-container').innerHTML=
         `<div class="order-summary"></div>
         <div class="js-payment-summary"></div>
-        <div class="js-header-checkout">
+        <div class="js-header-checkout"></div>
         </div>`
         spyOn(localStorage,'setItem');
         spyOn(localStorage,'getItem').and.callFake(()=>{
