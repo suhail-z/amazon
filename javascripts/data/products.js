@@ -1,3 +1,49 @@
+import { formatCurrency } from "../utils/currency.js";
+class Products{
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+  keywords;
+
+  constructor(productDetails){
+    this.id=productDetails.id;
+    this.image=productDetails.image;
+    this.name=productDetails.name;
+    this.rating=productDetails.rating;
+    this.priceCents=productDetails.priceCents;
+    this.keywords=productDetails.keywords;
+  }
+  getRatingURL(){
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+  getpriceCents(){
+    return formatCurrency(this.priceCents);
+  }
+
+  extraHTML(){
+    return '';
+  }
+};
+
+class Clothing extends Products{
+    sizeChartLink;
+    constructor(productDetails){
+      super(productDetails);
+      this.sizeChartLink=productDetails.sizeChartLink;
+    }
+
+    extraHTML(){
+     return `<a href="${this.sizeChartLink}" target="_blank">
+     Size Chart
+     </a>`;
+    }
+
+}
+
+
+
 export function getProduct(id){
   let match;
 
@@ -113,7 +159,9 @@ export const products = [
         "hoodies",
         "sweaters",
         "apparel"
-      ]
+      ],
+      type: "clothing",
+      sizeChartLink: "images/clothing-size-chart.png"
     },
     {
       id: "77919bbe-0e56-475b-adde-4f24dfed3a04",
@@ -682,7 +730,9 @@ export const products = [
         "hoodies",
         "apparel",
         "mens"
-      ]
+      ],
+      type: "clothing",
+      sizeChartLink: "images/clothing-size-chart.png"
     },
     {
       id:"vandhu nerula pesudaa entaa",
@@ -760,4 +810,11 @@ export const products = [
         "mens"
       ]
     },
-  ];
+  ].map((productDetails)=>{
+if(productDetails.type==='clothing'){
+  return new Clothing(productDetails);
+}
+else
+    return new Products(productDetails);
+  });
+  console.log(products);
