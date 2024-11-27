@@ -66,7 +66,32 @@ export function getProduct(id){
     })
 return match;
 }
+export let products=[];
 
+export function loadProductsFromBackend(passedCallbackFunctions){
+
+  const httpreq= new XMLHttpRequest();
+  
+  httpreq.addEventListener('load',()=>{
+   products = JSON.parse(httpreq.response).map((productDetails)=>{
+    if(productDetails.type==='clothing'){
+      return new Clothing(productDetails);
+    }
+    else if(productDetails.type==='appliance'){
+      return new Appliance(productDetails);
+    }
+    else
+        return new Products(productDetails);
+      });
+      passedCallbackFunctions();
+  })
+  
+  httpreq.open('GET','https:/supersimplebackend.dev/products');
+  httpreq.send();
+  
+}
+
+/*
 export const products = [
     {
       id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -837,4 +862,4 @@ else if(productDetails.type==='appliance'){
 else
     return new Products(productDetails);
   });
-  console.log(products);
+  */
