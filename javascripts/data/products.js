@@ -68,6 +68,28 @@ return match;
 }
 export let products=[];
 
+export function fetchproducts(){
+  const promise = fetch(
+    'https://supersimplebackend.dev/products'
+  ).then((response)=>{
+    return response.json();
+  })
+  .then((productsArray)=>{
+    products =  productsArray.map((productDetails)=>{
+      if(productDetails.type==='clothing'){
+        return new Clothing(productDetails);
+      }
+      else if(productDetails.type==='appliance'){
+        return new Appliance(productDetails);
+      }
+      else
+          return new Products(productDetails);
+        });
+
+    })
+    return promise;
+}
+/*
 export function loadProductsFromBackend(passedCallbackFunctions){
 
   const httpreq= new XMLHttpRequest();
