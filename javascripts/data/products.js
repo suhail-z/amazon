@@ -68,7 +68,7 @@ return match;
 }
 export let products=[];
 
-export function fetchproducts(){
+export function fetchProducts(){
   const promise = fetch(
     'https://supersimplebackend.dev/products'
   ).then((response)=>{
@@ -107,6 +107,10 @@ export function loadProductsFromBackend(passedCallbackFunctions){
       });
       passedCallbackFunctions();
   })
+
+  httpreq.addEventListener('error',()=>{
+    console.log(error);
+    })
   
   httpreq.open('GET','https:/supersimplebackend.dev/products');
   httpreq.send();

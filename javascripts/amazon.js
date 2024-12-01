@@ -1,8 +1,13 @@
 import {cart,addToCart} from "./data/cart.js"
-import { products,loadProductsFromBackend } from "./data/products.js";
+import { products,fetchProducts } from "./data/products.js";
 import { formatCurrency } from "./utils/currency.js";
 
-loadProductsFromBackend(renderProducts);
+async function load(){
+  await fetchProducts();
+
+  renderProducts();
+}
+load();
 
 function renderProducts(){
 
