@@ -83,7 +83,6 @@ function renderProducts(){
         let cancelTime;
 
       addToCart(productId);
-    console.log(cart);
         document.querySelector(`.added-${productId}`).classList.add('added-product');
 
         clearTimeout(cancelTime);

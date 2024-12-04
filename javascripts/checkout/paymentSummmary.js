@@ -2,7 +2,7 @@ import {cart} from '../data/cart.js';
 import { products,getProduct } from '../data/products.js';
 import { getDeliveryDetails } from '../data/deliveryOptions.js';
 import { formatCurrency } from '../utils/currency.js';
-
+import { placeOrder } from '../data/orders.js';
 
 export function renderPaymentSummmary(){
     let totalProductPrice=0,totalShipping=0;
@@ -54,4 +54,26 @@ export function renderPaymentSummmary(){
           </button>
     `
 document.querySelector('.js-payment-summary').innerHTML=paymentSummmaryHTML;
+
+document.querySelector('.place-order-button').addEventListener('click',async()=>{
+try{
+  const response = await fetch('https://supersimplebackend.dev/orders',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+      cart : cart
+    })
+  });
+ const orders = await response.json();
+
+  placeOrder(orders);
+  window.location.href='orders.html';
+}catch(error){
+  console.log(error);
+};
+
+})
+
 }

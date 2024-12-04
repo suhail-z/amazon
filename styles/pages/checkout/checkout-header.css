@@ -101,3 +101,15 @@
     width: auto;
   }
 }
+.returns-text {
+  display: block;
+  font-size: 13px;
+  color: black;
+}
+
+.orders-text {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: black;
+}
