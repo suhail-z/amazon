@@ -1,5 +1,6 @@
 
-export const orders = JSON.parse(localStorage.getItem('orders')) || [
+export const orders = JSON.parse(localStorage.getItem('orders')) || []
+/* || [
     { id: "a423c55a-9254-439e-80c1-2cfec7d4e7e4",
       orderTime: "2024-12-02T18:46:19.999Z",
       totalCostCents : 14397,
@@ -36,7 +37,7 @@ export const orders = JSON.parse(localStorage.getItem('orders')) || [
         ]
 
     }
-];
+];*/
 
 export function placeOrder(order){
     orders.unshift(order);

@@ -67,8 +67,9 @@ try{
     })
   });
  const orders = await response.json();
-
+  cart.length=0;
   placeOrder(orders);
+  localStorage.setItem('cart',JSON.stringify(cart));
   window.location.href='orders.html';
 }catch(error){
   console.log(error);
