@@ -38,7 +38,7 @@ function renderOrders(){
           </div>
 
           <div class="order-details-grid">
-            ${renderOrderedProducts(orderElement.products)}
+            ${renderOrderedProducts(orderElement.products,orderElement.id)}
 
           </div>
         </div>
@@ -56,7 +56,7 @@ function renderOrders(){
     })
   }
 
-  function renderOrderedProducts(products){
+  function renderOrderedProducts(products,orderId){
 
     let productHTML=''
     products.forEach(product=>{
@@ -83,7 +83,7 @@ function renderOrders(){
             </div>
 
             <div class="product-actions">
-              <a href="tracking.html">
+              <a href="tracking.html?orderid=${orderId}&productid=${product.productId}">
                 <button class="track-package-button button-secondary">
                   Track package
                 </button>
